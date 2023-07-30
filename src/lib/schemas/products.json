@@ -1,0 +1,32 @@
+{
+    "table_name": "departments",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "nullable": false,
+        "default": null,
+        "primaryKey":true,
+        "autoIncrement" : true
+      },
+      {
+        "name": "name",
+        "type": "varchar",
+        "nullable": false,
+        "default": null
+      },
+      {
+        "name": "location",
+        "type": "varchar",
+        "nullable": true,
+        "default": null
+      },
+      {
+        "name": "manager",
+        "type": "varchar",
+        "nullable": true,
+        "default": null
+      }
+    ]
+  }
+  
