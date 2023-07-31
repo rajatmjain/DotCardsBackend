@@ -15,8 +15,8 @@ To run the API server locally, follow these steps:
 
 2. Install the dependencies:
 
-   ```npm install
-
+   ```
+   npm install
    ```
 
 3. Start the server:
@@ -34,10 +34,14 @@ The API server provides endpoints to interact with various collections of data. 
 
 The API provides the following endpoints:
 
-POST /:collection: Create a new document in the specified collection.
-GET /:collection/:id: Get a document by its ID from the specified collection.
-PUT /:collection/:id: Update a document by its ID in the specified collection.
-DELETE /:collection/:id: Delete a document by its ID from the specified collection.
+POST `/:collection:` Create a new document in the specified collection.
+
+GET `/:collection/:id:` Get a document by its ID from the specified collection.
+
+PUT `/:collection/:id:` Update a document by its ID in the specified collection.
+
+DELETE `/:collection/:id:` Delete a document by its ID from the specified collection.
+
 For more detailed information and usage examples, refer to the Postman Collection section.
 
 ## JSON Schemas
