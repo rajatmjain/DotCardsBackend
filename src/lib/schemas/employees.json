@@ -1,32 +1,36 @@
 {
-    "table_name": "employees",
-    "columns": [
-      {
-        "name": "id",
-        "type": "integer",
-        "nullable": false,
-        "default": null,
-        "primaryKey": true,
-        "autoIncrement" : true
-      },
-      {
-        "name": "name",
-        "type": "text",
-        "nullable": false,
-        "default": null
-      },
-      {
-        "name": "age",
-        "type": "integer",
-        "nullable": true,
-        "default": null
-      },
-      {
-        "name": "department",
-        "type": "text",
-        "nullable": true,
-        "default": null
-      }
-    ]
-  }
-  
+  "table_name": "employees",
+  "columns": [
+    {
+      "name": "id",
+      "type": "integer",
+      "nullable": false,
+      "default": null,
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    {
+      "name": "name",
+      "type": "text",
+      "nullable": false,
+      "default": null
+    },
+    {
+      "name": "age",
+      "type": "integer",
+      "nullable": true,
+      "default": null
+    },
+    {
+      "name": "department",
+      "type": "text",
+      "nullable": true,
+      "default": null
+    },
+    {
+      "name": "manager",
+      "type": "text",
+      "nullable": true
+    }
+  ]
+}

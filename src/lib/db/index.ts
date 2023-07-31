@@ -2,7 +2,25 @@ import { Sequelize, DataTypes } from "sequelize";
 import fs from "fs/promises";
 import path from "path";
 
-const collections: any = {};
+interface Column {
+  name: string;
+  type: string;
+  nullable: boolean;
+  default: any;
+  primaryKey: boolean;
+  autoIncrement: boolean;
+}
+
+interface Schema {
+  table_name: string;
+  columns: Column[];
+}
+
+interface Collections {
+  [key: string]: any;
+}
+
+const collections: Collections = {};
 const directoryPathToScan = "./src/lib/schemas/";
 
 // Create a new Sequelize instance and specify the database's location
@@ -24,13 +42,13 @@ async function testConnection(): Promise<void> {
 async function createSequelizeModelFromJSON(): Promise<void> {
   const schemas = await processJsonFilesRecursively(directoryPathToScan);
 
-  schemas.forEach((schema: any) => {
+  schemas.forEach((schema: Schema) => {
     // Extract table name, columns, and data from the JSON
     const { table_name: tableName, columns } = schema;
 
     // Define the model attributes
     const modelAttributes: { [key: string]: any } = {};
-    columns.forEach((column: any) => {
+    columns.forEach((column: Column) => {
       modelAttributes[column.name] = {
         type: mapDataTypeToSequelize(column.type),
         allowNull: column.nullable,
@@ -40,6 +58,17 @@ async function createSequelizeModelFromJSON(): Promise<void> {
       };
     });
 
+    modelAttributes["createdAt"] = {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    };
+    modelAttributes["updatedAt"] = {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    };
+
     // Create the Sequelize model
     const Model = sequelize.define(tableName, modelAttributes);
     collections[tableName] = Model;
@@ -48,7 +77,6 @@ async function createSequelizeModelFromJSON(): Promise<void> {
 
 // Helper function to map PostgreSQL data types to Sequelize data types
 function mapDataTypeToSequelize(postgresDataType: string): any {
-  
   const dataTypeMap: { [key: string]: any } = {
     integer: DataTypes.INTEGER,
     bigint: DataTypes.BIGINT,
@@ -73,8 +101,8 @@ function mapDataTypeToSequelize(postgresDataType: string): any {
   return dataTypeMap[postgresDataType] || DataTypes.STRING;
 }
 
-async function processJsonFilesRecursively(directoryPath: string): Promise<any[]> {
-  const schemas: any[] = [];
+async function processJsonFilesRecursively(directoryPath: string): Promise<Schema[]> {
+  const schemas: Schema[] = [];
   try {
     const files = await fs.readdir(directoryPath);
 
@@ -103,3 +131,4 @@ async function processJsonFilesRecursively(directoryPath: string): Promise<any[]
 
 // Export the connection instance
 export { sequelize, testConnection, collections, createSequelizeModelFromJSON };
+
