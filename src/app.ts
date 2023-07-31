@@ -40,3 +40,5 @@ async function startServer(): Promise<void> {
 
 // Start the server
 startServer();
+
+export default app
