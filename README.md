@@ -62,6 +62,4 @@ You can find a Postman collection with pre-configured requests to test the API e
 
 ## Contributing
 
-Contributions to this project are welcome! If you find a bug or want to suggest an improvement, please open an issue or submit a pull request. Please make sure to follow the project's coding style and guidelines.
-
 If you have any questions or need further assistance, feel free to reach out.
