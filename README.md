@@ -46,7 +46,15 @@ For more detailed information and usage examples, refer to the Postman Collectio
 
 ## JSON Schemas
 
-The JSON schemas for defining the database tables are located in the src/lib/schemas/ directory. The schemas are used to create the Sequelize models for each collection.
+The JSON schemas for defining the database tables are located in the `src/lib/schemas/ directory``. The schemas are used to create the Sequelize models for each collection.
+
+To inject schemas from an external directory run the following command:
+
+```
+npx ts-node src/app.ts -p <pathToDirectory>
+```
+
+The -p or --schema-path flag allows you to specify a custom path to the JSON schemas. Replace `<pathToDirectory>` with the actual path to your desired JSON schemas. If the -p flag is not provided, the server will use the default directory path.
 
 ## Postman Collection
 

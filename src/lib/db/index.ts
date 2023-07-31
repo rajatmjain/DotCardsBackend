@@ -1,6 +1,7 @@
 import { Sequelize, DataTypes } from "sequelize";
 import fs from "fs/promises";
 import path from "path";
+import {program} from "commander"
 
 interface Column {
   name: string;
@@ -21,7 +22,15 @@ interface Collections {
 }
 
 const collections: Collections = {};
-const directoryPathToScan = "./src/lib/schemas/";
+const defaultDirectoryPathToScan = "./src/lib/schemas/";
+
+// Commander to accept a custom path as a flag (--schema-path)
+program.option("-p, --schema-path <path>", "Custom path for JSON schemas");
+program.parse(process.argv);
+const options = program.opts()
+
+const directoryPathToScan = options.schemaPath || defaultDirectoryPathToScan;
+
 
 // Create a new Sequelize instance and specify the database's location
 const sequelize = new Sequelize({
